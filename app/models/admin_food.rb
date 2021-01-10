@@ -1,0 +1,2 @@
+class AdminFood < ApplicationRecord
+end
