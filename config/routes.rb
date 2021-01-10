@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  
-  root to:'public/home#top'
+
+  root to:'public/homes#top'
   get 'about', to: 'public/homes#about'
-  
+  get 'admin', to: 'admin/homes#top'
+
   namespace :admins do
     resources :items, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     resources :orders, only: [:index, :new, :create, :show]
   end
-  
+
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
