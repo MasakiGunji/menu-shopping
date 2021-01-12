@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>食材ジャンル一覧</h1>
+        <%= form_with model: @food_genre, url: admin_food_genres_path, local: true do |f| %>
+        <P>食材ジャンル名</P>
+        <%= f.text_field :name, class: "form-control" %>
+        買い物リスト
+        <%= f.radio_button :status, true, checked: true  %>表示
+        <%= f.radio_button :status, false %>非表示
+        </br><%= f.submit '追加', class:"btn btn-primary" %>
+        <% end %>
+
+        <% @food_genres.each do |food_genre| %>
+          </BR>
+          <%= food_genre.name %>
+          <% if food_genre.status == true %>
+            買い物リスト(表示)
+          <% else %>
+            買い物リスト(非表示)
+          <% end %>
+          <%= form_with model: food_genre, url: admin_food_genre_path(food_genre), local: true do |f| %>
+            <%= f.text_field :name %>
+            <%= f.radio_button :status, true, checked: true  %>表示
+            <%= f.radio_button :status, false %>非表示
+            <%= f.submit '変更', class:"btn btn-primary" %>
+          <% end %>
+          <%= link_to '削除', admin_food_genre_path(food_genre), method: :delete, class:"btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+        <% end %>
+    </div>
+  </div>
+</div>
+
