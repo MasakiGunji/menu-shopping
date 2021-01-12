@@ -4,12 +4,9 @@ Rails.application.routes.draw do
   get 'about', to: 'public/homes#about'
   get 'admin', to: 'admin/homes#top'
 
-  namespace :admins do
-    resources :items, except: [:destroy]
-    resources :genres, only: [:index, :create, :edit, :update]
-    resources :customers, only: [:index, :show, :edit, :update]
-    resources :orders, only: [:index, :show, :update]
-    resources :order_details, only: [:update]
+  namespace :admin do
+    resources :admin_foods, except: [:show,:new]
+    resources :food_genres, except: [:edit,:new,:show]
   end
 
   scope module: "public" do

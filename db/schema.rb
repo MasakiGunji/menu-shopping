@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_115918) do
+ActiveRecord::Schema.define(version: 2021_01_10_075902) do
 
   create_table "admin_foods", force: :cascade do |t|
     t.integer "food_genre_id"
     t.string "name"
-    t.string "u"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unit"
   end
 
   create_table "admins", force: :cascade do |t|
