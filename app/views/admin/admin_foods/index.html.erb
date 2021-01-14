@@ -2,7 +2,40 @@
   <div class="row">
     <div class="col">
       <%= link_to "食材ジャンル", admin_food_genres_path %>
-      
+      <%= form_with model: @admin_food, url: admin_admin_foods_path, local: true do |f| %>
+        <%= f.collection_select :food_genre_id, @food_genres, :id, :name, { prompt: "選択してください" } %>
+        食品名
+        <%= f.text_field :name %>
+        単位
+        <%= f.text_field :unit %>
+        <%= f.submit '追加', class:"btn btn-primary" %>
+      <% end %>
+
+      <% @food_genres.each do |food_genre| %>
+        </BR>
+        <%= food_genre.name %>
+
+        <%= form_with model: @admin_food, url: admin_admin_foods_path, local: true do |f| %>
+        <%= f.hidden_field :food_genre_id, :value => food_genre.id %>
+        食品名
+        <%= f.text_field :name %>
+        単位
+        <%= f.text_field :unit %>
+        <%= f.submit '追加', class:"btn btn-primary" %>
+        <% end %>
+
+        <% if food_genre.status == true %>
+          買い物リスト(表示)
+        <% else %>
+          買い物リスト(非表示)
+        <% end %>
+          <% food_genre.admin_foods.each do |admin_food|%>
+            <%= admin_food.name %>
+            <%= link_to edit_admin_admin_food_path(admin_food) do %>
+              X
+            <% end %>
+          <% end %>
+      <% end %>
     </div>
   </div>
 </div>
