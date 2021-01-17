@@ -1,0 +1,2 @@
+module RecipeGenresHelper
+end
