@@ -23,9 +23,9 @@ class Admin::AdminFoodsController < ApplicationController
   end
 
   def destroy
-    @admin_food = Admin.find(params[:id])
+    @admin_food = AdminFood.find(params[:id])
     @admin_food.destroy
-    redirect_to edit_admin_admin_food_path(@admin_food)
+    redirect_to admin_admin_foods_path
   end
 
   private

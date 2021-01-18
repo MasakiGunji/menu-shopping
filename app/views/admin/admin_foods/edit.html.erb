@@ -12,6 +12,7 @@
         <%= f.select :status, AdminFood.statuses.keys.map {|k| [I18n.t("enums.admin_food.status.#{k}"), k]} %>
         <%= f.submit '更新', class:"btn btn-primary" %>
       <% end %>
+      <%= link_to '削除', admin_admin_food_path(@admin_food), method: :delete, class:"btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
 
       <% @food_genres.each do |food_genre| %>
         </BR>
@@ -26,8 +27,8 @@
             <%= admin_food.name %>
             <%= link_to edit_admin_admin_food_path(admin_food) do %>
               X
-            <% end %>
           <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>
