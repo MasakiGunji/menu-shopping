@@ -1,0 +1,7 @@
+ja:
+  enums:
+    admin_food:
+      status:
+        integer: "整数"
+        fraction: "分数"
+        string: "文字列"

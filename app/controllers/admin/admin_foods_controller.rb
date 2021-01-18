@@ -19,7 +19,7 @@ class Admin::AdminFoodsController < ApplicationController
   def update
     @admin_food = AdminFood.find(params[:id])
     @admin_food.update(admin_food_params)
-    redirect_to edit_admin_admin_food_path(@admin_food)
+    redirect_to admin_admin_foods_path
   end
 
   def destroy
@@ -30,6 +30,6 @@ class Admin::AdminFoodsController < ApplicationController
 
   private
   def admin_food_params
-    params.require(:admin_food).permit(:food_genre_id, :name, :unit)
+    params.require(:admin_food).permit(:food_genre_id, :name, :unit, :status)
   end
 end
