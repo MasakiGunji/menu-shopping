@@ -9,22 +9,14 @@
         <%= f.text_field :name %>
         単位
         <%= f.text_field :unit %>
-        <%= f.submit '追加', class:"btn btn-primary" %>
+        <%= f.select :status, AdminFood.statuses.keys.map {|k| [I18n.t("enums.admin_food.status.#{k}"), k]} %>
+        <%= f.submit '更新', class:"btn btn-primary" %>
       <% end %>
 
       <% @food_genres.each do |food_genre| %>
         </BR>
         <%= food_genre.name %>
-
-        <%= form_with model: @admin_food, url: admin_admin_foods_path, local: true do |f| %>
-        <%= f.hidden_field :food_genre_id, :value => food_genre.id %>
-        食品名
-        <%= f.text_field :name %>
-        単位
-        <%= f.text_field :unit %>
-        <%= f.submit '追加', class:"btn btn-primary" %>
-        <% end %>
-
+        </BR>
         <% if food_genre.status == true %>
           買い物リスト(表示)
         <% else %>

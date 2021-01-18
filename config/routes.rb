@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'recipes/index'
+    get 'recipes/new'
+    get 'recipes/create'
+    get 'recipes/show'
+    get 'recipes/edit'
+    get 'recipes/update'
+    get 'recipes/destroy'
+  end
   root to:'public/homes#top'
   get 'about', to: 'public/homes#about'
   get 'admin', to: 'admin/homes#top'
@@ -11,10 +20,8 @@ Rails.application.routes.draw do
   end
 
   scope module: "public" do
+    resources :recipes
     resources :items, only: [:index, :show]
-    resources :cart_items, only: [:index, :create, :update, :destroy]
-    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
-    resources :orders, only: [:index, :new, :create, :show]
   end
 
   devise_for :admins, controllers: {

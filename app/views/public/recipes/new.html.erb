@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>レシピ投稿</h1>
+        <%= form_with model: @recipe, url: recipes_path, local: true do |f| %>
+        <%= f.attachment_field :image %>
+        <h1>レシピ名</h1>
+        <%= f.text_field :name, class: 'form-control' %>
+        <%= f.collection_select :recipe_genre_id, @recipe_genres, :id, :name, { prompt: "選択してください" } %>
+        <h1>作り方</h1>
+        <%= f.text_area :body, class: 'form-control' %>
+        </br><%= f.submit 'レシピを作成', class:'btn btn-primary' %>
+        <% end %>
+    </div>
+  </div>
+</div>

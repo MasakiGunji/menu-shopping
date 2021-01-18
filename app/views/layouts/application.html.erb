@@ -25,15 +25,15 @@
             <li class="nav-item"><%= link_to 'レシピジャンル', admin_recipe_genres_path, class:'nav-link' %></li>
           <% else %>
             <li class="nav-item"><a class="nav-link" href="#">みんなのレシピ</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">マイレシピ</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">レシピを書く</a></li>
+            <li class="nav-item"><%= link_to 'マイレシピ', recipes_path, class:'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'レシピを書く', new_recipe_path, class:'nav-link' %></li>
             <li class="nav-item"><a class="nav-link" href="#">献立リスト</a></li>
           <% end %>
         </ul>
 
         <ul class="navbar-nav">
           <% if end_user_signed_in? %>
-            <li class="nav-item"><%= link_to '管理者画面', admin_path, class:'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'マイページ', admin_path, class:'nav-link' %></li>
             <li class="nav-item"><%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete, class:'nav-link' %></li>
           <% elsif admin_signed_in? %>
             <li class="nav-item"><%= link_to '管理者画面', admin_path, class:'nav-link' %></li>
