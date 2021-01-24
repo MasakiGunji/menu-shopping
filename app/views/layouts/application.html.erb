@@ -12,35 +12,33 @@
   <body>
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
       <div class="navbar-brand"><%= link_to 'menu&shopping', root_path %></div>
-      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-navi" aria-controls="bs-navi" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="bs-navi">
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <% if admin_signed_in? %>
             <li class="nav-item"><a class="nav-link" href="#">みんなのレシピ</a></li>
-            <li class="nav-item"><%= link_to '食材一覧', admin_admin_foods_path, class:'nav-link' %></li>
-            <li class="nav-item"><%= link_to 'レシピジャンル', admin_recipe_genres_path, class:'nav-link' %></li>
+            <li class="nav-item"><%= link_to '食材一覧', admin_foods_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'レシピジャンル', admin_recipe_genres_path, class:"nav-link" %></li>
           <% else %>
             <li class="nav-item"><a class="nav-link" href="#">みんなのレシピ</a></li>
-            <li class="nav-item"><%= link_to 'マイレシピ', recipes_path, class:'nav-link' %></li>
-            <li class="nav-item"><%= link_to 'レシピを書く', new_recipe_path, class:'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'マイレシピ', recipes_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'レシピを書く', new_recipe_path, class:"nav-link" %></li>
             <li class="nav-item"><a class="nav-link" href="#">献立リスト</a></li>
           <% end %>
         </ul>
 
         <ul class="navbar-nav">
           <% if end_user_signed_in? %>
-            <li class="nav-item"><%= link_to 'マイページ', admin_path, class:'nav-link' %></li>
-            <li class="nav-item"><%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete, class:'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'マイページ', admin_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete, class:"nav-link" %></li>
           <% elsif admin_signed_in? %>
-            <li class="nav-item"><%= link_to '管理者画面', admin_path, class:'nav-link' %></li>
-            <li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:'nav-link' %></li>
+            <li class="nav-item"><%= link_to '管理者画面', admin_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"nav-link" %></li>
           <% else %>
-            <li class="nav-item"><%= link_to '新規登録', new_end_user_registration_path, class:'nav-link' %></li>
-            <li class="nav-item"><%= link_to 'ログイン', new_end_user_session_path, class:'nav-link' %></li>
+            <li class="nav-item"><%= link_to '新規登録', new_end_user_registration_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'ログイン', new_end_user_session_path, class:"nav-link" %></li>
           <% end %>
         </ul>
       </div>

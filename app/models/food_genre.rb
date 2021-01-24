@@ -1,3 +1,3 @@
 class FoodGenre < ApplicationRecord
-  has_many :admin_foods, dependent: :destroy
+  has_many :foods, dependent: :destroy
 end

@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_121428) do
-
-  create_table "admin_foods", force: :cascade do |t|
-    t.integer "food_genre_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "unit"
-    t.integer "status"
-  end
+ActiveRecord::Schema.define(version: 2021_01_24_112226) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -50,6 +41,33 @@ ActiveRecord::Schema.define(version: 2021_01_18_121428) do
   create_table "food_genres", force: :cascade do |t|
     t.string "name"
     t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.integer "food_genre_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "unit"
+    t.integer "status"
+  end
+
+  create_table "purchas_recipes", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.integer "recipe_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_foods", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "food_id"
+    t.integer "numerator", default: 1
+    t.integer "denominator", default: 1
+    t.string "other_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
