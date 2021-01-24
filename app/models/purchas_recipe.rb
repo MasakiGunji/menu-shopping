@@ -1,0 +1,2 @@
+class PurchasRecipe < ApplicationRecord
+end

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-4">
+      <%= attachment_image_tag @recipe, :image, :fill, 200, 200 %></br>
+      <%= @recipe.name %>
+
+      <% @recipe.recipe_foods.each do |recipe_food| %>
+        <%= form_with model: recipe_food, url: recipe_recipe_food_path(recipe_food.recipe_id,recipe_food.id), local: true do |f| %>
+          <%= recipe_food.food.name %>
+            <% if recipe_food.food.status == 'fraction' %>
+              <%= f.number_field :numerator %>/
+              <%= f.number_field :denominator %>
+            <% elsif recipe_food.food.status == 'integer' %>
+              <%= f.number_field :numerator %>
+            <% else %>
+              <%= f.text_field :other_unit %>
+            <% end %>
+          <%= recipe_food.food.unit %>
+          <%= f.submit '変更' %>|
+        <% end %>
+        <%= link_to '削除', recipe_recipe_food_path(recipe_food.recipe_id,recipe_food.id), method: :delete, class:"btn btn-danger-sm" %>
+      <% end %>
+
+    </div>
+    <div class="col-8">
+      <% @food_genres.each do |food_genre| %>
+      <div class="row">
+        <div class="col">
+          <p class="mt-3"><%= food_genre.name %></p>
+          <% food_genre.foods.each do |food|%>
+            <%= form_with model: @recipe_food, url: recipe_recipe_foods_path, class:"inline", local: true do |f| %>
+              <%= f.hidden_field :food_id, :value => food.id %>
+              <%= f.submit food.name, class:"btn btn-sm mt-3 inline" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

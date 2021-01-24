@@ -1,18 +1,24 @@
 Rails.application.routes.draw do
 
+  get 'purchas_recipes/index'
+  get 'purchas_recipes/create'
+  get 'purchas_recipes/update'
+  get 'purchas_recipes/destroy'
+  get 'purchas_recipes/destroy_all'
   root to:'public/homes#top'
   get 'about', to: 'public/homes#about'
   get 'admin', to: 'admin/homes#top'
 
   namespace :admin do
-    resources :admin_foods, except: [:show,:new]
+    resources :foods, except: [:show,:new]
     resources :food_genres, except: [:edit,:new,:show]
     resources :recipe_genres, except: [:edit,:new,:show]
   end
 
   scope module: "public" do
-    resources :recipes
-    resources :food_
+    resources :recipes do
+      resources :recipe_foods, only: [:index, :new, :create, :update, :destroy]
+    end
     resources :items, only: [:index, :show]
   end
 
