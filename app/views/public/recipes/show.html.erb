@@ -20,13 +20,21 @@
         <%= f.submit '献立に追加' %>
       <% end %>
     </div>
-  </div>
-  <div class="row">
     <div class="col-6">
-    食材
-    <% @recipe.foods.each do |food| %>
-      <%= food.name %>
-    <% end %>        
+      <h3>必要食材</h3>
+      <% @recipe.recipe_foods.each do |recipe_food| %>
+          <%= recipe_food.food.name %>
+            <% if recipe_food.food.status == 'fraction' %>
+              <%= recipe_food.numerator %>/
+              <%= recipe_food.denominator %>
+            <% elsif recipe_food.food.status == 'integer' %>
+              <%= recipe_food.numerator %>
+            <% else %>
+              <%= recipe_food.other_unit %>
+            <% end %>
+          <%= recipe_food.food.unit %>
+          </br>
+      <% end %>
     </div>
-  </div>  
+  </div>
 </div>

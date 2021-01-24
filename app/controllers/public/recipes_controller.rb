@@ -1,10 +1,22 @@
 class Public::RecipesController < ApplicationController
   def index_all
-    @recipe_genres = RecipeGenre.includes(:recipes).all
+    if params[:id]
+      @recipes = Recipe.where(recipe_genre_id: params[:id])
+      @recipe_genre = RecipeGenre.find(params[:id])
+    else
+      @recipes = Recipe.all
+    end
+    @recipe_genres = RecipeGenre.all
   end
-  
+
   def index
-    @recipe_genres = RecipeGenre.includes(:recipes).where(recipes: {end_user_id: current_end_user.id})
+    if params[:id]
+      @recipes = Recipe.where(recipe_genre_id: params[:id], end_user_id: current_end_user.id)
+      @recipe_genre = RecipeGenre.find(params[:id])
+    else
+      @recipes = Recipe.where(end_user_id: current_end_user.id)
+    end
+    @recipe_genres = RecipeGenre.all
   end
 
   def new
