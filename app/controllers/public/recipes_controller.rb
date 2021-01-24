@@ -1,4 +1,8 @@
 class Public::RecipesController < ApplicationController
+  def index_all
+    @recipe_genres = RecipeGenre.includes(:recipes).all
+  end
+  
   def index
     @recipe_genres = RecipeGenre.includes(:recipes).where(recipes: {end_user_id: current_end_user.id})
   end
@@ -17,6 +21,7 @@ class Public::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @purchas_recipe = PurchasRecipe.new
   end
 
   def edit
