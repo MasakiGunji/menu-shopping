@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1>マイレシピ一覧</h1>
+      <h1>みんなのレシピ一覧</h1>
       <% @recipe_genres.each do |recipe_genre| %>
         <% recipe_genre.recipes.each do |recipe| %>
           <%= link_to recipe_path(recipe) do %>
@@ -10,7 +10,7 @@
           <% end %>
         <% end %>
       <% end %>
-      
+
     </div>
   </div>
 </div>

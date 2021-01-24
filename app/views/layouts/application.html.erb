@@ -11,7 +11,7 @@
 
   <body>
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
-      <div class="navbar-brand"><%= link_to 'menu&shopping', root_path %></div>
+      <div class="navbar-brand"><%= link_to 'Menu&Shopping', root_path %></div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,10 +22,10 @@
             <li class="nav-item"><%= link_to '食材一覧', admin_foods_path, class:"nav-link" %></li>
             <li class="nav-item"><%= link_to 'レシピジャンル', admin_recipe_genres_path, class:"nav-link" %></li>
           <% else %>
-            <li class="nav-item"><a class="nav-link" href="#">みんなのレシピ</a></li>
+            <li class="nav-item"><%= link_to 'みんなのレシピ', recipes_index_all_path, class:"nav-link" %></li>
             <li class="nav-item"><%= link_to 'マイレシピ', recipes_path, class:"nav-link" %></li>
             <li class="nav-item"><%= link_to 'レシピを書く', new_recipe_path, class:"nav-link" %></li>
-            <li class="nav-item"><a class="nav-link" href="#">献立リスト</a></li>
+            <li class="nav-item"><%= link_to '献立リスト', purchas_recipes_path, class:"nav-link" %></li>
           <% end %>
         </ul>
 

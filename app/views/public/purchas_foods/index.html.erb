@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% @purchas_foods.each do |purchas_food| %>
+        <%= purchas_food.food.name %>
+          <% if purchas_food.food.status == 'fraction' %>
+            <%= purchas_food.numerator %>/
+            <%= purchas_food.denominator %>
+          <% elsif purchas_food.food.status == 'integer' %>
+            <%= purchas_food.numerator %>
+          <% end %>
+        <%= purchas_food.food.unit %>
+        </br>
+      <% end %>
+    </div>
+  </div>
+</div>

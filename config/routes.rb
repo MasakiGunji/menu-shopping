@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
 
-  get 'purchas_recipes/index'
-  get 'purchas_recipes/create'
-  get 'purchas_recipes/update'
-  get 'purchas_recipes/destroy'
-  get 'purchas_recipes/destroy_all'
   root to:'public/homes#top'
   get 'about', to: 'public/homes#about'
   get 'admin', to: 'admin/homes#top'
+  get 'recipes/index_all', to: 'public/recipes#index_all'
+  delete 'purchas_recipes/destroy_all', to: 'public/purchas_recipes#destroy_all'
+  delete 'purchas_foods/destroy_all', to: 'public/purchas_foods#destroy_all'
+
 
   namespace :admin do
     resources :foods, except: [:show,:new]
@@ -19,7 +18,9 @@ Rails.application.routes.draw do
     resources :recipes do
       resources :recipe_foods, only: [:index, :new, :create, :update, :destroy]
     end
-    resources :items, only: [:index, :show]
+    resources :purchas_recipes, except: [:new, :show]
+
+    resources :purchas_foods, except: [:new, :show]
   end
 
   devise_for :admins, controllers: {
