@@ -14,7 +14,7 @@ class Public::PurchasRecipesController < ApplicationController
       @purchas_recipe.end_user_id = current_end_user.id
       @purchas_recipe.save
     end
-    @recipe = Recipe.includes(:recipe_foods, :foods).find(params[:purchas_recipe][:recipe_id])
+    @recipe = Recipe.includes(:recipe_foods,:foods).find(params[:purchas_recipe][:recipe_id])
     @recipe.recipe_foods.each do |recipe_food|
       @purchas_food = PurchasFood.find_by(end_user_id: current_end_user.id, food_id: recipe_food.food_id)
       if @purchas_food
@@ -79,7 +79,6 @@ class Public::PurchasRecipesController < ApplicationController
   end
 
   private
-
   def purchas_recipe_params
     params.require(:purchas_recipe).permit(:amount, :recipe_id, :end_user_id)
   end
