@@ -25,5 +25,4 @@ class Admin::AdminFoodsControllerTest < ActionDispatch::IntegrationTest
     get admin_admin_foods_destroy_url
     assert_response :success
   end
-
 end

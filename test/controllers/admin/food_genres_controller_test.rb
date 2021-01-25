@@ -20,5 +20,4 @@ class Admin::FoodGenresControllerTest < ActionDispatch::IntegrationTest
     get admin_food_genres_destroy_url
     assert_response :success
   end
-
 end

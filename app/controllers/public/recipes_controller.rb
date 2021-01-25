@@ -53,8 +53,8 @@ class Public::RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
-
   private
+
   def recipe_params
     params.require(:recipe).permit(:name, :body, :image, :recipe_genre_id, :end_user_id)
   end

@@ -25,5 +25,4 @@ class Admin::RecipeGenresControllerTest < ActionDispatch::IntegrationTest
     get admin_recipe_genres_destroy_url
     assert_response :success
   end
-
 end
