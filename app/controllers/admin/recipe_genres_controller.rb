@@ -23,6 +23,7 @@ class Admin::RecipeGenresController < ApplicationController
   end
 
   private
+
   def recipe_genre_params
     params.require(:recipe_genre).permit(:name)
   end

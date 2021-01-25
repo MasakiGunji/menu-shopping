@@ -25,5 +25,4 @@ class PurchasRecipesControllerTest < ActionDispatch::IntegrationTest
     get purchas_recipes_destroy_all_url
     assert_response :success
   end
-
 end

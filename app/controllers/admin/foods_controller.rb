@@ -1,5 +1,4 @@
 class Admin::FoodsController < ApplicationController
-
   def index
     @admin_food = Food.new
     @food_genres = FoodGenre.includes(:foods).all
@@ -29,6 +28,7 @@ class Admin::FoodsController < ApplicationController
   end
 
   private
+
   def food_params
     params.require(:food).permit(:food_genre_id, :name, :unit, :status)
   end

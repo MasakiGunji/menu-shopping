@@ -1,6 +1,6 @@
 class Public::RecipeFoodsController < ApplicationController
   def new
-    @recipe = Recipe.includes(:recipe_foods,:foods).find(params[:recipe_id])
+    @recipe = Recipe.includes(:recipe_foods, :foods).find(params[:recipe_id])
     @food_genres = FoodGenre.includes(:foods).all
     @recipe_food = RecipeFood.new
   end
@@ -17,7 +17,7 @@ class Public::RecipeFoodsController < ApplicationController
     @recipe_food.update(recipe_food_params)
     redirect_to new_recipe_recipe_food_path
   end
-  
+
   def destroy
     @recipe_food = RecipeFood.find(params[:id])
     @recipe_food.destroy
@@ -25,6 +25,7 @@ class Public::RecipeFoodsController < ApplicationController
   end
 
   private
+
   def recipe_food_params
     params.require(:recipe_food).permit(:recipe_id, :food_id, :numerator, :denominator, :other_unit)
   end
