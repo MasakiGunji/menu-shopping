@@ -1,7 +1,9 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <%= link_to "食材ジャンル", admin_food_genres_path %>
+  <div class="row mt-3">
+    <div class="col-10 mx-auto"><%= link_to "食材ジャンル", admin_food_genres_path,class:"btn btn-success btn-sm" %></div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-10 mx-auto">
       <%= form_with model: @food, url: admin_foods_path, local: true do |f| %>
         <%= f.collection_select :food_genre_id, @food_genres, :id, :name, { prompt: "選択してください" } %>
         食品名
@@ -11,33 +13,39 @@
         <%= f.select :status, Food.statuses.keys.map {|k| [I18n.t("enums.food.status.#{k}"), k]} %>
         <%= f.submit '追加', class:"btn btn-primary" %>
       <% end %>
-
+      <table class="table table-responsive mt-3">
       <% @food_genres.each do |food_genre| %>
-        </BR>
-        <%= food_genre.name %>
-
-        <%= form_with model: @food, url: admin_foods_path, local: true do |f| %>
-        <%= f.hidden_field :food_genre_id, :value => food_genre.id %>
-        食品名
-        <%= f.text_field :name %>
-        単位
-        <%= f.text_field :unit %>
-        <%= f.select :status, Food.statuses.keys.map {|k| [I18n.t("enums.food.status.#{k}"), k]} %>
-        <%= f.submit '追加', class:"btn btn-primary" %>
-        <% end %>
-
-        <% if food_genre.status == true %>
-          買い物リスト(表示)
-        <% else %>
-          買い物リスト(非表示)
-        <% end %>
-          <% food_genre.foods.each do |food|%>
-            <%= food.name %>
-            <%= link_to edit_admin_food_path(admin_food) do %>
-              X
-            <% end %>
-          <% end %>
+        <thead>
+          <tr>
+            <th><%= food_genre.name %></th>
+            <th class="py-2">
+              <%= form_with model: @food, url: admin_foods_path,class:'inline', local: true do |f| %>
+                <%= f.hidden_field :food_genre_id, :value => food_genre.id %>
+                食品名
+                <%= f.text_field :name %>
+                単位
+                <%= f.text_field :unit %>
+                <%= f.select :status, Food.statuses.keys.map {|k| [I18n.t("enums.food.status.#{k}"), k]} %>
+                <%= f.submit '追加', class:"btn btn-primary btn-sm" %>
+              <% end %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-1" colspan="2">
+              <% food_genre.foods.each do |food|%>
+                <%= food.name %>
+                <%= link_to edit_admin_food_path(food) do %>
+                  X
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
       <% end %>
+      </table>
     </div>
   </div>
 </div>
+

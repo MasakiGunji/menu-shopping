@@ -1,17 +1,18 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <h1>レシピ編集</h1>
-        <%= form_with model: @recipe, url: recipe_path, local: true do |f| %>
-        <%= attachment_image_tag @recipe, :image, :fill, 200, 200 %>
-        <%= f.attachment_field :image %>
-        <h1>レシピ名</h1>
-        <%= f.text_field :name, class: "form-control" %>
-        <h1>作り方</h1>
-        <%= f.text_area :body, class: "form-control" %>
-        </br><%= f.submit '更新', class:"btn btn-primary" %>
+  <div class="row mt-5">
+    <div class="col-10 mx-auto">
+      <h2>レシピ編集</h2>
+        <%= form_with model: @recipe, url: recipes_path, local: true do |f| %>
+        <%= attachment_image_tag @recipe, :image, :fill, 200, 200 %></br>
+        <%= f.attachment_field :image,class:"mt-3" %>
+        <h3 class="mt-3">レシピ名</h3>
+        <%= f.text_field :name, class: 'form-control' %>
+        <h3 class="mt-3">ジャンル</h3>
+        <%= f.collection_select :recipe_genre_id, @recipe_genres, :id, :name, { prompt: "選択してください" } %>
+        <h3 class="mt-3">作り方</h3>
+        <%= f.text_area :body, class: 'form-control' %>
+        </br><%= f.submit '保存', class:'btn btn-success float-right' %>
         <% end %>
-        <p><%= link_to '削除', recipe_path(@recipe), method: :delete, class:'btn btn-danger', 'data-confirm' => '本当に削除ますか？' %></p>
     </div>
   </div>
 </div>

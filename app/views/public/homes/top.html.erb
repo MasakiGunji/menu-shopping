@@ -1,24 +1,38 @@
-<div class="container bg-white">
+<div class="container">
   <div class="row mt-5">
-    <div class="col">
-
-      <div class="container">
-        <div class="theTarget">
-          <div id="box">
-            <div class="image1"></div>
-            <div class="image2"></div>
-            <div class="image3"></div>
-            <div class="image4"></div>
-            <div class="image5"></div>
-          </div>
+    <div class="col-5">
+      <div class="theTarget">
+        <div id="box">
+          <div class="image1"></div>
+          <div class="image2"></div>
+          <div class="image3"></div>
+          <div class="image4"></div>
+          <div class="image5"></div>
         </div>
       </div>
-
     </div>
-    <div class="col">
+    <div class="col-7 text-center">
+      <div class="mt-5">
+        <h4>
+          このサイトではレシピを投稿、閲覧することが出来ます。
+        </h4>
+        <h5 class="mt-5">
+          投稿されているレシピから献立に追加することで</br>
+          買い物リストが作成できます。
+        </h5>
+        <h4 class="mt-3">
+          会員登録し、普段の買い物をもっと便利にしましょう！
+        </h4>
+      </div>
+      <div>
+        <%= link_to '新規登録', new_end_user_registration_path, class:"btn btn-primary mt-3 width-300" %>
+      </div>
+      <div>
+        <%= link_to 'ログイン', new_end_user_session_path, class:"btn btn-success mt-4 width-300" %>
+      </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-5">
     <div class="col">
       <%= link_to "管理者はこちらから", new_admin_session_path %>
     </div>

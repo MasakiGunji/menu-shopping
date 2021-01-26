@@ -29,6 +29,22 @@ height: 50px;
   display: inline;
 }
 
-.nav-pills > .active > a, .nav-pills > .active > a:hover {
-    background-color: red;
+textarea.form-control{
+  height: 200px;
+}
+
+.recipe-body{
+  white-space: pre-wrap;
+}
+
+.width-40{
+  width: 40px;
+}
+
+.width-100{
+  width: 100px;
+}
+
+.width-300{
+  width: 500px;
 }

@@ -1,40 +1,66 @@
 <div class="container">
-  <div class="row">
-    <div class="col-6">
-      <h1>レシピ詳細</h1>
-      <%= attachment_image_tag @recipe, :image, :fill, 200, 200 %>
-      <h1>レシピ名</h1>
-      <%= @recipe.name %>
-      <h2>ジャンル名</h2>
-      <%= @recipe.recipe_genre.name %>
-      <%= link_to '食材を追加', new_recipe_recipe_food_path(@recipe) %>
-      <h2>作り方</h2>
-      <%= @recipe.body %>
-      <% if @recipe.end_user_id == current_end_user.id %>
-        <%= link_to '編集', edit_recipe_path(@recipe), class:'btn btn-primary' %>
-        <%= link_to '削除', recipe_path, method: :delete, class:'btn btn-danger', 'data-confirm' => '本当に削除しますか？' %>
-      <% end %>
-      <%= form_with model: @purchas_recipe, url: purchas_recipes_path, local: true do |f| %>
-        <%= f.number_field :amount, value: 1 %>
-        <%= f.hidden_field :recipe_id, :value => @recipe.id %>
-        <%= f.submit '献立に追加' %>
-      <% end %>
+  <div class="row mt-5">
+    <div class="col">
+      <h3><%= @recipe.name %></h3>
     </div>
-    <div class="col-6">
-      <h3>必要食材</h3>
-      <% @recipe.recipe_foods.each do |recipe_food| %>
-          <%= recipe_food.food.name %>
-            <% if recipe_food.food.status == 'fraction' %>
-              <%= recipe_food.numerator %>/
-              <%= recipe_food.denominator %>
-            <% elsif recipe_food.food.status == 'integer' %>
-              <%= recipe_food.numerator %>
-            <% else %>
-              <%= recipe_food.other_unit %>
-            <% end %>
-          <%= recipe_food.food.unit %>
-          </br>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div>
+        <%= attachment_image_tag @recipe, :image, :fill, 300, 300 %>
+      </div>
+      <div class="my-3">
+        <%= form_with model: @purchas_recipe, url: purchas_recipes_path, class:"inline", local: true do |f| %>
+          <%= f.number_field :amount, value: 1, class:"width-40" %>
+          <%= f.hidden_field :recipe_id, :value => @recipe.id %>
+          <span>人前</span>
+          <%= f.submit '献立に追加' %>
+        <% end %>
+        <% if end_user_signed_in? %>
+          <% if @recipe.end_user_id == current_end_user.id %>
+            <%= link_to '編集', edit_recipe_path(@recipe), class:'btn btn-success btn-sm ml-5' %>
+            <%= link_to '削除', recipe_path, method: :delete, class:'btn btn-danger btn-sm', 'data-confirm' => '本当に削除しますか？' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-4">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>材料</th>
+            <th class="py-2"><%= link_to '食材を追加', new_recipe_recipe_food_path(@recipe), class:'btn btn-primary btn-sm float-right' %></th>
+          </tr>
+        </thead>
+        <% @food_genres.each do |food_genre| %>
+          <tbody>
+          <% food_genre.recipe_foods.each do |recipe_food| %>
+            <tr>
+              <td class="py-1"><%= recipe_food.food.name %></td>
+              <td class="py-1">
+                <div class="float-right">
+                  <% if recipe_food.food.status == 'fraction' %>
+                    <%= recipe_food.numerator %>/
+                    <%= recipe_food.denominator %>
+                  <% elsif recipe_food.food.status == 'integer' %>
+                    <%= recipe_food.numerator %>
+                  <% else %>
+                    <%= recipe_food.other_unit %>
+                  <% end %>
+                  <%= recipe_food.food.unit %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
       <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <h2>作り方</h2>
+      <p class="recipe-body"><%= @recipe.body %></p>
     </div>
   </div>
 </div>

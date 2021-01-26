@@ -1,36 +1,65 @@
 <div class="container">
   <div class="row mt-3">
     <div class="col">
-      <%= link_to '空にする', purchas_recipes_destroy_all_path, method: :delete, class:"btn btn-primary mg-auto", "data-confirm" => "本当に空にしますか？" %>
-      <%= link_to '食材リスト', purchas_foods_path, class:"btn btn-primary mg-auto" %>
+      <%= link_to '空にする', purchas_recipes_destroy_all_path, method: :delete, class:"btn btn-primary float-right mr-5", "data-confirm" => "本当に空にしますか？" %>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col-6">
+      <div class="row">
       <% @purchas_recipes.each do |purchas_recipe| %>
-        <%= link_to recipe_path(purchas_recipe.recipe_id) do %>
-          <%= attachment_image_tag purchas_recipe.recipe, :image, :fill, 200, 200 %>
-          <%= purchas_recipe.recipe.name %>
+        <div class="col-xs-3">
+            <div class="card mx-3 mb-3" style="width: 250px;">
+              <%= link_to recipe_path(purchas_recipe.recipe_id) do %>
+                <%= attachment_image_tag purchas_recipe.recipe, :image, :fill, 200, 200, class:"card-img-top"  %>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to purchas_recipe.recipe.name, recipe_path(purchas_recipe.recipe_id) %></h5>
+              <%= form_with model: purchas_recipe, url: purchas_recipe_path(purchas_recipe),class:"inline", local: true do |f| %>
+                <%= f.number_field :amount, class:"width-40" %>
+                <span>人前</span>
+                <%= f.submit '変更', class:'btn btn-success btn-sm' %>
+              <% end %>
+              <%= link_to '削除', purchas_recipe_path(purchas_recipe), class:'btn btn-danger btn-sm ml-4', method: :delete %>
+            </div>
+          </div>
+        </div>
         <% end %>
-        <%= form_with model: purchas_recipe, url: purchas_recipe_path(purchas_recipe), local: true do |f| %>
-          <%= f.number_field :amount %>
-          <%= f.submit '変更' %>
-        <% end %>
-        <%= link_to '削除', purchas_recipe_path(purchas_recipe), method: :delete %>
-      <% end %>
+      </div>
     </div>
-    <div class="col-6">
-      <% @purchas_foods.each do |purchas_food| %>
-        <%= purchas_food.food.name %>
-          <% if purchas_food.food.status == 'fraction' %>
-            <%= purchas_food.numerator %>/
-            <%= purchas_food.denominator %>
-          <% elsif purchas_food.food.status == 'integer' %>
-            <%= purchas_food.numerator %>
+    <div class="col-1"></div>
+    <div class="col-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>買い物リスト</th>
+            <th class="py-2"></th>
+          </tr>
+        </thead>
+        <% @food_genres.each do |food_genre| %>
+          <tbody>
+          <% food_genre.purchas_foods.each do |purchas_food| %>
+            <tr>
+              <td class="py-1"><%= purchas_food.food.name %></td>
+              <td class="py-1">
+                <div class="float-right">
+                  <% if purchas_food.food.status == 'fraction' %>
+                    <%= purchas_food.numerator %>/
+                    <%= purchas_food.denominator %>
+                  <% elsif purchas_food.food.status == 'integer' %>
+                    <%= purchas_food.numerator %>
+                  <% end %>
+                  <%= purchas_food.food.unit %>
+                </div>
+              </td>
+            </tr>
           <% end %>
-        <%= purchas_food.food.unit %>
-        </br>
+        </tbody>
       <% end %>
+      </table>
     </div>
   </div>
 </div>
+
+
+
