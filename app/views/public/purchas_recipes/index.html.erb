@@ -20,8 +20,12 @@
       <% end %>
     </div>
     <div class="col-6">
-      <% @purchas_foods.each do |purchas_food| %>
-        <%= purchas_food.food.name %>
+
+        <% @food_genres.each do |food_genre| %>
+        <%= food_genre.name %>
+        </br>
+        <% food_genre.purchas_foods.each do |purchas_food| %>
+          <%= purchas_food.food.name %>
           <% if purchas_food.food.status == 'fraction' %>
             <%= purchas_food.numerator %>/
             <%= purchas_food.denominator %>
@@ -30,6 +34,7 @@
           <% end %>
         <%= purchas_food.food.unit %>
         </br>
+        <% end %>
       <% end %>
     </div>
   </div>

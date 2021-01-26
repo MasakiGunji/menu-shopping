@@ -34,6 +34,7 @@ class Public::RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     @purchas_recipe = PurchasRecipe.new
+    @food_genres = FoodGenre.includes(:recipe_foods).where(recipe_foods: { recipe_id: params[:id]})
   end
 
   def edit

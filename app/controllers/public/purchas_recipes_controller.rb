@@ -3,7 +3,7 @@ class Public::PurchasRecipesController < ApplicationController
   def index
     @purchas_recipes = PurchasRecipe.includes(:recipe).where(end_user_id: current_end_user.id)
     @purchas_foods = PurchasFood.where(end_user_id: current_end_user.id)
-    @food_genres = FoodGenre.where
+    @food_genres = FoodGenre.includes(:purchas_foods).where(purchas_foods: { end_user_id: current_end_user.id})
   end
 
   def create

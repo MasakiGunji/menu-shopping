@@ -1,34 +1,45 @@
-<div class="container">
+<div class="container mt-4">
   <div class="row">
-    <div class="col-xs-2">
-      <table class="table table-striped">
-      	<thead>
-      		<tr>
-      			<th>ジャンル検索</th>
-      		</tr>
-      	</thead>
-      	<tbody>
-        	<% @recipe_genres.each do |recipe_genre|%>
-      		<tr>
-      			<td>
-      			  <%= form_tag recipes_path, method: :get do %>
-      			    <%= hidden_field_tag :id, recipe_genre.id %>
-      			    <%= submit_tag recipe_genre.name %>
-      			  <% end %>
-      			</td>
-      		</tr>
-      		<% end %>
-      	</tbody>
-      </table>
-    </div>
+    <h2 class="ml-5">みんなのレシピ</h2>
+  </div>
+  <div class="row mt-3 mb-5">
     <div class="col">
-      <h1>みんなのレシピ一覧</h1>
-      <% @recipes.each do |recipe| %>
-        <%= link_to recipe_path(recipe) do %>
-          <%= attachment_image_tag recipe, :image, :fill, 200, 200 %>
-          <h3><%= recipe.name %></h3>
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item border">
+          <% if @recipe_genre %>
+            <%= link_to '新着', recipes_index_all_path,class: "nav-link bg-light" %>
+          <% else %>
+            <%= link_to '新着', recipes_index_all_path,class: "nav-link active" %>
+          <% end %>
+        </li>
+        <% @recipe_genres.each do |recipe_genre|%>
+        <li class="nav-item border">
+          <% if @recipe_genre %>
+            <% if recipe_genre.id == @recipe_genre.id %>
+              <%= link_to recipe_genre.name, recipes_index_all_path(id: recipe_genre.id), class: "nav-link active" %>
+            <% else %>
+              <%= link_to recipe_genre.name, recipes_index_all_path(id: recipe_genre.id), class: "nav-link bg-light" %>
+            <% end %>
+          <% else %>
+            <%= link_to recipe_genre.name, recipes_index_all_path(id: recipe_genre.id), class: "nav-link bg-light" %>
+          <% end %>
+        </li>
         <% end %>
-      <% end %>
+      </ul>
     </div>
+  </div>
+  <div class="row">
+    <% @recipes.each do |recipe| %>
+    <div class="col-xs-3 mx-1">
+      <div class="card mt-2" style="width: 277px;">
+        <%= link_to recipe_path(recipe) do %>
+          <%= attachment_image_tag recipe, :image, :fill, 150, 150, class:"card-img-top"  %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to recipe.name, recipe_path(recipe) %></h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
   </div>
 </div>

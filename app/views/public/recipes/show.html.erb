@@ -22,18 +22,23 @@
     </div>
     <div class="col-6">
       <h3>必要食材</h3>
-      <% @recipe.recipe_foods.each do |recipe_food| %>
+      
+      <% @food_genres.each do |food_genre| %>
+        <%= food_genre.name %>
+        </br>
+        <% food_genre.recipe_foods.each do |recipe_food| %>
           <%= recipe_food.food.name %>
-            <% if recipe_food.food.status == 'fraction' %>
-              <%= recipe_food.numerator %>/
-              <%= recipe_food.denominator %>
-            <% elsif recipe_food.food.status == 'integer' %>
-              <%= recipe_food.numerator %>
-            <% else %>
-              <%= recipe_food.other_unit %>
-            <% end %>
-          <%= recipe_food.food.unit %>
-          </br>
+          <% if recipe_food.food.status == 'fraction' %>
+            <%= recipe_food.numerator %>/
+            <%= recipe_food.denominator %>
+          <% elsif recipe_food.food.status == 'integer' %>
+            <%= recipe_food.numerator %>
+          <% else %>
+            <%= recipe_food.other_unit %>
+          <% end %>
+        <%= recipe_food.food.unit %>
+        </br>
+        <% end %>
       <% end %>
     </div>
   </div>
