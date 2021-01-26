@@ -1,10 +1,10 @@
 class Public::RecipesController < ApplicationController
   def index_all
     if params[:id]
-      @recipes = Recipe.where(recipe_genre_id: params[:id])
+      @recipes = Recipe.where(recipe_genre_id: params[:id]).order(id: "DESC")
       @recipe_genre = RecipeGenre.find(params[:id])
     else
-      @recipes = Recipe.all
+      @recipes = Recipe.all.order(id: "DESC")
     end
     @recipe_genres = RecipeGenre.all
   end
@@ -12,10 +12,10 @@ class Public::RecipesController < ApplicationController
   def index
     if end_user_signed_in?
       if params[:id]
-        @recipes = Recipe.where(recipe_genre_id: params[:id], end_user_id: current_end_user.id)
+        @recipes = Recipe.where(recipe_genre_id: params[:id], end_user_id: current_end_user.id).order(id: "DESC")
         @recipe_genre = RecipeGenre.find(params[:id])
       else
-        @recipes = Recipe.where(end_user_id: current_end_user.id)
+        @recipes = Recipe.where(end_user_id: current_end_user.id).order(id: "DESC")
       end
       @recipe_genres = RecipeGenre.all
     else
