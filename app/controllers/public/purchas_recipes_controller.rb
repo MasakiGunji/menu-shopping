@@ -1,4 +1,5 @@
 class Public::PurchasRecipesController < ApplicationController
+  before_action :authenticate_end_user!
   def index
     @purchas_recipes = PurchasRecipe.includes(:recipe).where(end_user_id: current_end_user.id)
     @purchas_foods = PurchasFood.where(end_user_id: current_end_user.id)

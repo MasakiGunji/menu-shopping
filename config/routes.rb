@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to:'public/homes#top'
   get 'about', to: 'public/homes#about'
   get 'admin', to: 'admin/homes#top'
+  get 'my_page', to: 'public/homes#my_page'
   get 'recipes/index_all', to: 'public/recipes#index_all'
   delete 'purchas_recipes/destroy_all', to: 'public/purchas_recipes#destroy_all'
   delete 'purchas_foods/destroy_all', to: 'public/purchas_foods#destroy_all'
