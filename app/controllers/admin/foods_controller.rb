@@ -30,6 +30,6 @@ class Admin::FoodsController < ApplicationController
 
   private
   def food_params
-    params.permit(:food_genre_id, :name, :unit, :status)
+    params.require(:food).permit(:food_genre_id, :name, :unit, :status)
   end
 end
