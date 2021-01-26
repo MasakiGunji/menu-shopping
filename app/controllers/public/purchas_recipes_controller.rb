@@ -34,7 +34,7 @@ class Public::PurchasRecipesController < ApplicationController
         @purchas_food.save
       end
     end
-    redirect_to recipes_path
+    redirect_to purchas_recipes_path
   end
 
   def update
