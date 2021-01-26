@@ -2,7 +2,7 @@ class Public::RecipeFoodsController < ApplicationController
   def new
     @recipe = Recipe.includes(:recipe_foods, :foods).find(params[:recipe_id])
     @food_genres = FoodGenre.includes(:foods).all
-    @recipe_food_genres = FoodGenre.includes(:recipe_foods).where(recipe_foods: { recipe_id: params[:recipe_id]})
+    @recipe_food_genres = FoodGenre.includes(:recipe_foods).where(recipe_foods: { recipe_id: params[:recipe_id]}).order(id: "ASC")
     @recipe_food = RecipeFood.new
   end
 
