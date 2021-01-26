@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col-5">
-      <h2><%= @recipe.name %></h2>
-      <%= attachment_image_tag @recipe, :image, :fill, 200, 200 %></br>
+      <%= link_to recipe_path(@recipe) do %>
+        <h2><%= @recipe.name %></h2>
+        <%= attachment_image_tag @recipe, :image, :fill, 200, 200 %></br>
+      <% end %>
       <table class="table table-responsive mt-3">
         <thead>
           <tr>
