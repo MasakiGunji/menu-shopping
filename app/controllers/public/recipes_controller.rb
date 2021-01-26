@@ -10,18 +10,26 @@ class Public::RecipesController < ApplicationController
   end
 
   def index
-    if params[:id]
-      @recipes = Recipe.where(recipe_genre_id: params[:id], end_user_id: current_end_user.id)
-      @recipe_genre = RecipeGenre.find(params[:id])
+    if end_user_signed_in?
+      if params[:id]
+        @recipes = Recipe.where(recipe_genre_id: params[:id], end_user_id: current_end_user.id)
+        @recipe_genre = RecipeGenre.find(params[:id])
+      else
+        @recipes = Recipe.where(end_user_id: current_end_user.id)
+      end
+      @recipe_genres = RecipeGenre.all
     else
-      @recipes = Recipe.where(end_user_id: current_end_user.id)
+      redirect_to new_end_user_session_path
     end
-    @recipe_genres = RecipeGenre.all
   end
 
   def new
-    @recipe = Recipe.new
-    @recipe_genres = RecipeGenre.all
+    if end_user_signed_in?
+      @recipe = Recipe.new
+      @recipe_genres = RecipeGenre.all
+    else
+      redirect_to new_end_user_session_path
+    end
   end
 
   def create
