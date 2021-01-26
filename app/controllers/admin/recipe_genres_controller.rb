@@ -1,4 +1,5 @@
 class Admin::RecipeGenresController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @recipe_genres = RecipeGenre.all
     @recipe_genre = RecipeGenre.new

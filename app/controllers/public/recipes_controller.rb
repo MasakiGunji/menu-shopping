@@ -28,7 +28,7 @@ class Public::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.end_user_id = current_end_user.id
     @recipe.save
-    redirect_to recipe_path(@recipe)
+    redirect_to new_recipe_recipe_food_path(@recipe)
   end
 
   def show
