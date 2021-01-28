@@ -73,3 +73,12 @@ textarea.form-control{
      object-fit: cover;
    }
 }
+
+@media (max-width: 992px) {
+  .nav-font {
+    font-size: 40px;
+  }
+  .purchas-font{
+    font-size: 25px;
+  }
+}

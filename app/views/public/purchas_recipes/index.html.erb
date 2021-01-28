@@ -31,20 +31,22 @@
         <table class="table">
           <thead>
             <tr>
-              <th>買い物リスト</th>
-              <th class="py-2"><%= link_to '空にする', purchas_recipes_destroy_all_path, method: :delete, class:"btn btn-primary float-right px-3", "data-confirm" => "本当に空にしますか？" %></th>
+              <th class="purchas-font">買い物リスト</th>
+              <th class="py-2"><%= link_to '空にする', purchas_recipes_destroy_all_path, method: :delete, class:"btn btn-primary float-right px-4", "data-confirm" => "本当に空にしますか？" %></th>
             </tr>
           </thead>
           <% @food_genres.each do |food_genre| %>
             <tbody>
             <% food_genre.purchas_foods.each do |purchas_food| %>
               <tr>
-                <td class="py-1"><%= purchas_food.food.name %></td>
-                <td class="py-1">
+                <td class="py-1 purchas-font"><%= purchas_food.food.name %></td>
+                <td class="py-1 purchas-font">
                   <div class="float-right">
                     <% if purchas_food.food.status == 'fraction' %>
                       <% if purchas_food.denominator != 1 %>
-                        <%= purchas_food.division %>と
+                        <% if purchas_food.division != 0 %>
+                          <%= purchas_food.division %>...
+                        <% end %>
                         <%= purchas_food.remainder %>
                         /<%= purchas_food.denominator %>
                       <% else %>
