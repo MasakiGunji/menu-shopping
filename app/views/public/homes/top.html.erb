@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-5">
-      <div class="theTarget">
-        <div id="box">
+    <div class="col-6">
+      <div class="box">
+        <div class="theTarget">
           <div class="image1"></div>
           <div class="image2"></div>
           <div class="image3"></div>
@@ -11,26 +11,31 @@
         </div>
       </div>
     </div>
-    <div class="col-7 text-center">
-      <div class="mt-5">
-        <h4>
-          このサイトではレシピを投稿、閲覧することが出来ます。
-        </h4>
-        <h5 class="mt-5">
-          投稿されているレシピから献立に追加することで</br>
-          買い物リストが作成できます。
-        </h5>
-        <h4 class="mt-3">
-          会員登録し、普段の買い物をもっと便利にしましょう！
-        </h4>
+    <% if end_user_signed_in? %>
+      <div class="col-6 text-center">
       </div>
-      <div>
-        <%= link_to '新規登録', new_end_user_registration_path, class:"btn btn-primary mt-3 width-300" %>
+    <% else %>
+      <div class="col-6 text-center">
+        <div class="mt-5">
+          <h4>
+            このサイトではレシピを投稿</br>閲覧することが出来ます。
+          </h4>
+          <h5 class="mt-3">
+            投稿されているレシピから献立に追加することで</br>
+            買い物リストが作成できます。
+          </h5>
+          <h4 class="mt-3">
+            会員登録し</br>普段の買い物をもっと便利にしましょう！
+          </h4>
+        </div>
+        <div class="mx-5">
+          <%= link_to '新規登録', new_end_user_registration_path, class:"btn btn-primary mt-3 form-control" %>
+        </div>
+        <div class="mx-5">
+          <%= link_to 'ログイン', new_end_user_session_path, class:"btn btn-success mt-4 form-control" %>
+        </div>
       </div>
-      <div>
-        <%= link_to 'ログイン', new_end_user_session_path, class:"btn btn-success mt-4 width-300" %>
-      </div>
-    </div>
+    <% end %>
   </div>
   <div class="row mt-5">
     <div class="col">
