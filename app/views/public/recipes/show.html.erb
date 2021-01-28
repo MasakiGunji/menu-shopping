@@ -41,7 +41,9 @@
                 <div class="float-right">
                 <% if recipe_food.food.status == 'fraction' %>
                   <% if recipe_food.denominator != 1 %>
-                    <%= recipe_food.division %>と
+                    <% if recipe_food.division != 0 %>
+                      <%= recipe_food.division %>...
+                    <% end %>
                     <%= recipe_food.remainder %>
                     /<%= recipe_food.denominator %>
                   <% else %>
