@@ -12,22 +12,38 @@
       </div>
     </div>
     <% if end_user_signed_in? %>
-      <div class="col-6 text-center">
+      <div class="col-2"></div>
+      <div class="col-4 text-center float-right">
+        <%= link_to 'レシピを書く', new_recipe_path, class:"btn btn-primary form-control" %>
+        <ul class="list-group mt-5">
+          <%= link_to recipes_index_all_path do %>
+        	  <li class="list-group-item bg-info text-light">みんなのレシピ</li>
+        	<% end %>
+          <% @recipe_genres.each do |recipe_genre|%>
+            <%= link_to recipes_index_all_path(id: recipe_genre.id) do %>
+              <li class="list-group-item text-secondary">-<%= recipe_genre.name %></li>
+            <% end %>
+          <% end %>
+          <%= link_to recipes_path do %>
+        	  <li class="list-group-item text-secondary">マイレシピ</li>
+        	<% end %>
+        </ul>
+        <div>
+          <%= link_to '献立リスト', purchas_recipes_path, class:"btn btn-warning form-control mt-5" %>
+        </div>
       </div>
     <% else %>
       <div class="col-6 text-center">
-        <div class="mt-5">
-          <h4>
-            このサイトではレシピを投稿</br>閲覧することが出来ます。
-          </h4>
-          <h5 class="mt-3">
-            投稿されているレシピから献立に追加することで</br>
-            買い物リストが作成できます。
-          </h5>
-          <h4 class="mt-3">
-            会員登録し</br>普段の買い物をもっと便利にしましょう！
-          </h4>
-        </div>
+        <h4>
+          このサイトではレシピを投稿</br>閲覧することが出来ます。
+        </h4>
+        <h5 class="mt-3">
+          投稿されているレシピから献立に追加することで</br>
+          買い物リストが作成できます。
+        </h5>
+        <h4 class="mt-3">
+          会員登録し</br>普段の買い物をもっと便利にしましょう！
+        </h4>
         <div class="mx-5">
           <%= link_to '新規登録', new_end_user_registration_path, class:"btn btn-primary mt-3 form-control" %>
         </div>
@@ -39,7 +55,9 @@
   </div>
   <div class="row mt-5">
     <div class="col">
-      <%= link_to "管理者はこちらから", new_admin_session_path %>
+      <% unless end_user_signed_in? || admin_signed_in? %>
+        <%= link_to "管理者はこちらから", new_admin_session_path %>
+      <% end%>
     </div>
   </div>
 </div>

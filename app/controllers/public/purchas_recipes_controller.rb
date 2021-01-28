@@ -80,7 +80,7 @@ class Public::PurchasRecipesController < ApplicationController
     @purchas_recipes.destroy_all
     @purchas_foods = PurchasFood.where(end_user_id: current_end_user.id)
     @purchas_foods.destroy_all
-    redirect_to recipes_path
+    redirect_to purchas_recipes_path
   end
 
   private

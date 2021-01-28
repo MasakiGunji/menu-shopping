@@ -39,15 +39,20 @@
               <td class="py-1"><%= recipe_food.food.name %></td>
               <td class="py-1">
                 <div class="float-right">
-                  <% if recipe_food.food.status == 'fraction' %>
-                    <%= recipe_food.numerator %>/
-                    <%= recipe_food.denominator %>
-                  <% elsif recipe_food.food.status == 'integer' %>
-                    <%= recipe_food.numerator %>
+                <% if recipe_food.food.status == 'fraction' %>
+                  <% if recipe_food.denominator != 1 %>
+                    <%= recipe_food.division %>と
+                    <%= recipe_food.remainder %>
+                    /<%= recipe_food.denominator %>
                   <% else %>
-                    <%= recipe_food.other_unit %>
+                    <%= recipe_food.numerator %>
                   <% end %>
-                  <%= recipe_food.food.unit %>
+                <% elsif recipe_food.food.status == 'integer' %>
+                  <%= recipe_food.numerator %>
+                <% else %>
+                  <%=recipe_food.other_unit %>
+                <% end %>
+                <%= recipe_food.food.unit %>
                 </div>
               </td>
             </tr>
