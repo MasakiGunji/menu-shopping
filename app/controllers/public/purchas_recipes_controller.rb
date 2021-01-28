@@ -39,17 +39,21 @@ class Public::PurchasRecipesController < ApplicationController
 
   def update
     @purchas_recipe = PurchasRecipe.find(params[:id])
-    @purchas_recipe.recipe.recipe_foods.each do |recipe_food|
-      @purchas_food = PurchasFood.find_by(end_user_id: current_end_user.id, food_id: recipe_food.food_id)
-      a = Rational(@purchas_food.numerator, @purchas_food.denominator)
-      b = Rational(recipe_food.numerator * (params[:purchas_recipe][:amount].to_i - @purchas_recipe.amount), recipe_food.denominator)
-      c = a + b
-      @purchas_food.numerator = c.numerator
-      @purchas_food.denominator = c.denominator
-      @purchas_food.save
+    if PurchasRecipe.new(purchas_recipe_params).amount > 0
+      @purchas_recipe.recipe.recipe_foods.each do |recipe_food|
+        @purchas_food = PurchasFood.find_by(end_user_id: current_end_user.id, food_id: recipe_food.food_id)
+        a = Rational(@purchas_food.numerator, @purchas_food.denominator)
+        b = Rational(recipe_food.numerator * (params[:purchas_recipe][:amount].to_i - @purchas_recipe.amount), recipe_food.denominator)
+        c = a + b
+        @purchas_food.numerator = c.numerator
+        @purchas_food.denominator = c.denominator
+        @purchas_food.save
+        end
+      @purchas_recipe.update(purchas_recipe_params)
+      redirect_to purchas_recipes_path
+    else
+      redirect_to purchas_recipes_path
     end
-    @purchas_recipe.update(purchas_recipe_params)
-    redirect_to purchas_recipes_path
   end
 
   def destroy
