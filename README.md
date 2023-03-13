@@ -12,13 +12,12 @@
 ### URL
 http://3.222.255.210/
 
-ユーザー
-Adress:user@user
-Pass:123456
-
-管理者
-Adress:admin@admin
-Pass:123456
+ユーザー　　
+Adress:user@user　　
+Pass:123456　　
+管理者　　
+Adress:admin@admin　　
+Pass:123456　　
 
 ### サイトテーマ
 
