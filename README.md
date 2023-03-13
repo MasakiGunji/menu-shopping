@@ -12,13 +12,13 @@
 ### URL
 http://3.222.255.210/
 
-ユーザー
-Adress:user@user
-Pass:123456
+ユーザー  
+Adress:user@user  
+Pass:123456  
 
-管理者
-Adress:admin@admin
-Pass:123456
+管理者  
+Adress:admin@admin  
+Pass:123456  
 
 ### サイトテーマ
 
@@ -43,7 +43,7 @@ Pass:123456
 
 ## 設計書
 
-ER図
+ER図  
 https://drive.google.com/file/d/1G5B6cVen6qECpLmIJ_l8VEdU-YRy6smK/view?usp=sharing  
 
 ## 開発環境
